@@ -1,27 +1,9 @@
-
-# CS 6601: Artificial Intelligence - Assignment 1 - Search
-
-## Setup
-
-Clone the repository and activate the Conda repository you created in Assignment 0:
-
-```
-git clone https://github.gatech.edu/omscs6601/assignment_1.git
-conda activate ai_env
-```
-
-
 ## Overview
 
 Search is an integral part of AI. It helps in problem solving across a wide variety of domains where a solution isn’t immediately clear.  You will implement several graph search algorithms with the goal of solving bi-directional and tri-directional search.
 
-### Submission
-
-All code you will edit is in the `submission.py` file, which will be submitted to Gradescope for grading. You are allowed **two submissions every thirty minutes**. In your Gradescope submission history, you can mark a certain submission as 'Active'.
 
 ### The Files
-
-While you'll only have to edit and submit **__submission.py__**, there are a number of notable files:
 
 | File | Description |
 | ----:| :-----------|
@@ -33,39 +15,10 @@ While you'll only have to edit and submit **__submission.py__**, there are a num
 |**_search_case_visualizer.py_**| Module used to visualize test cases of interest. |
 |**_romania_graph.pickle_** | Serialized graph files for Romania. |
 |**_romania_references.pickle** | Serialized reference cases for Romania. |
-|**_atlanta_osm.pickle_** | Serialized graph files for Atlanta (optional for robust testing for Race!). |
 |**_explorable_graph.py_** | A wrapper around `networkx` that tracks explored nodes. **FOR DEBUGGING ONLY** |
 |**_visualize_graph.py_** | Module to visualize search results. See below on how to use it. |
 |**_osm2networkx.py_** | Module used by visualize graph to read OSM networks. |
 
-## Resources
-
-* [Gradescope: Error Messages](https://docs.google.com/document/d/1hykYneVoV_JbwBjVz9ayFTA6Yr3pgw6JBvzrCgM0vyY/pub)
-* Canvas Course Videos: Search Module
-* [R&N slides on Uninformed Search](https://www.cc.gatech.edu/~thad/6601-gradAI-fall2015/chapter03-clean.pdf)
-* [Informed Search](https://www.cc.gatech.edu/~thad/6601-gradAI-fall2015/chapter04a.pdf)
-* [Comparing BFS and DFS](https://cs.stanford.edu/people/abisee/tutorial/bfsdfs.html)
-* [A* Search](https://cs.stanford.edu/people/abisee/tutorial/astar.html)
-
-Links from Canvas, below the videos:
-* [Finding Optimal Solutions to Rubik's Cube Using Pattern Databases](https://www.cs.princeton.edu/courses/archive/fall06/cos402/papers/korfrubik.pdf)
-* [God's Number is 26 in the Quarter-Turn Metric](http://www.cube20.org/qtm/)
-* [Reach for A∗: An Efficient Point-to-Point Shortest Path Algorithm](http://www.cc.gatech.edu/~thad/6601-gradAI-fall2015/02-search-01-Astart-ALT-Reach.pdf)
-* [Computing the Shortest Path: A∗ Search Meets Graph Theory](http://www.cc.gatech.edu/~thad/6601-gradAI-fall2015/02-search-Goldberg03tr.pdf)
-* [Reach-based Routing: A New Approach to Shortest Path Algorithms Optimized for Road Networks](http://www.cc.gatech.edu/~thad/6601-gradAI-fall2015/02-search-Gutman04siam.pdf)
-
-Resources for bi-directional searches
-* [A Star meets Graph Theory](https://github.gatech.edu/omscs6601/assignment_1/raw/master/resources/A%20Star%20meets%20Graph%20Theory.pdf)
-* [Bi Directional A Star - Slides](https://github.gatech.edu/omscs6601/assignment_1/raw/master/resources/Bi%20Directional%20A%20Star%20-%20Slides.pdf)
-* [Bi Directional A Star with Additive Approx Bounds](https://github.gatech.edu/omscs6601/assignment_1/raw/master/resources/Bi%20Directional%20A%20Star%20with%20Additive%20Approx%20Bounds.pdf)
-* [Bi Directional A Star](https://github.gatech.edu/omscs6601/assignment_1/raw/master/resources/Bi%20Directional%20A%20Star.pdf)
-* [Search Algorithms Slide Deck](https://github.gatech.edu/omscs6601/assignment_1/raw/master/resources/Search%20Algorithms%20Slide%20Deck.pdf)
-* [Bi Directional Stopping Conditions, Piazza '17](https://docs.google.com/document/d/14Wr2SeRKDXFGdD-qNrBpXjW8INCGIfiAoJ0UkZaLWto/pub)
-* [Bi Directional Search Visualizations](https://drive.google.com/file/d/1SxhOnAn4uAI17HdTq082PuzQ_jZnp4Nw/view?usp=sharing)
-* [Piazza: Landmark Example](https://docs.google.com/document/d/1YEptGbSYUtu180MfvmrmA4B6X9ImdI4oOmLaaMRHiCA/pub)
-
-
-**_Please refrain from referring code/psuedocode from other resources aside from these._**
 
 ## The Assignment
 
@@ -73,10 +26,7 @@ Your task is to implement several informed search algorithms that will calculate
 There is a `search_basic_tests.py` file and a `search_romania_tests.py` file to help you along the way. Your searches should be executed with minimal runtime and memory overhead.
 
 We will be using an undirected network representing a map of Romania (and an optional Atlanta graph used for the Race!).
-
-#### Grading
-
-Points for each section are awarded based on finding the correct path and by evaluating the number of nodes explored. To track the number of times a node is explored during the search, the `ExplorableGraph` wrapper is used on the networkx Graph class. Every time you process a node, by calling `graph[node]` or `graph.neighbors(node)`, the count for that node increases by one. You will need to use one of these methods to add a node's neighbors to the search queue, just be careful not to call it unnecessarily throughout your code. We have created the `graph.get_edge_weight(u, v)` method to be used to access edge weights between two nodes, `u` and `v`. All other normal `networkx` Graph operations can be performed.  
+ 
 
 #### Visualizing the Atlanta graph:
 
@@ -84,37 +34,9 @@ The Atlanta graph is used in some later parts of this assignment. However, it is
 If you want to see how **_visualize_graph.py_** is used, take a look at the test functions like `test_bi_ucs_atlanta_custom` in **_search_atlanta_tests.py_**
 
 
-#### Frequently Asked Questions
-
-> * If start and goal are the same, you should return [].
-> * When nodes in the priority queue have the same priority value, break ties according to FIFO. Hint: A counter can be used to track when nodes enter the priority queue.
-> * Your priority queue implementation should allow for duplicate nodes to enter the queue.
-> * There is a little more to this when you get to tridirectional, so read those Notes especially carefully as well
-> * **Do not** use graph.explored_nodes for anything that you submit to Gradescope. This can be used for debugging, but you should not be calling this in your code. Please make sure you read the "grading" section above.
-> * **Do not** create a copy of the graph structure for any of the algorithms or compuations.
-> * If you are stuck, check out the resources! We recognize this is a hard assignment and tri-directional search is a more research-oriented topic than the other search algorithms. Many previous students have found it useful to go through the resources in this README if they are having difficulty understanding the algorithms. Hopefully they are of some use to you all as well! :)
-> * We have included the "Haversine" heuristic in the `search_atlanta_tests.py` file. All of the local tests on the Atlanta map use this method. For the race, you can use whatever you choose, but know that the Atlanta map positions are (latitude, longitude). If you would like to learn more about this formula, here is a link: https://en.wikipedia.org/wiki/Haversine_formula
-> * Make sure you clean up any changes/modifications/additions you make to the networkx graph structure before you exit the search function. Depending on your changes, the auto grader might face difficulties while testing. The best alternative is to create your own data structure(s).
-> * If you're having problems (exploring too many nodes) with your Breadth first search implementation, one thing many students have found useful is to re-watch the Canvas videos for an optimization trick mentioned.
-> * Most 'NoneType object ...' errors are because the path you return is not completely connected (a pair of successive nodes in the path are not connected). Or because the path variable itself is empty.
-> * Adding unit tests to your code may cause your submission to fail. It is best to comment them out when you submit.
-> * The submissions will be graded by an autograder, and it will time out in 10 minutes. If you observe an abnormality, let us know on Ed.
-> * You may have two submissions in a window of 30min
-> * Gradescope will only allow the imports we provide you. I.e. You will lose a submission if you submit something with any other imports
 
 
-#### Unit Tests
 
-We have provided several official unit test files that students have found useful. They are not complete, and these tests are not guaranteed to ensure full points on the autograder, but they should help in development. To run:
-```
-python search_basic_tests.py            # Basic tests, visualizes on Romania graph
-python search_submission_tests_grid.py  # Visualize search on grid
-python search_romania_tests.py          # More comprehensive tests on Romania graph
-python search_atlanta_tests.py          # Tests on Atlanta graph
-```
-
-### Warmups
-We'll start by implementing some simpler optimization and search algorithms before the real exercises.
 
 #### Warmup 1: Priority queue
 
@@ -285,12 +207,3 @@ _[1 point]_
 
 A simple task to wind down the assignment. Return your name from the function aptly called `return_your_name()`.
 
-
-### The Race!
-
-Here's your chance to show us your best stuff. This part is mandatory if you want to compete in the race for extra credit. Implement `custom_search()` using whatever strategy you like.
-**More details will be posted soon on Piazza.**
-
-**Bonus points are added to the grade for this assignment, not to your overall grade.**
-
-The Race! will be based on Atlanta Pickle data.
